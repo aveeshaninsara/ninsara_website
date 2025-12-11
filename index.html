@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aveesha Ninsara | Developer Portfolio</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #FF9F1C; /* The Orange/Yellow from the reference */
+            --dark-blue: #1A1A2E; /* The Dark text color */
+            --button-blue: #2A0896; /* The distinct blue button */
+            --bg-light: #ffffff;
+            --bg-off-white: #f3f4f6;
+            --text-gray: #4b5563;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--dark-blue);
+            overflow-x: hidden;
+        }
+
+        /* --- Navbar --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--dark-blue);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i { color: var(--button-blue); }
+
+        .nav-links a {
+            margin-left: 30px;
+            color: var(--dark-blue);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--button-blue);
+        }
+
+        /* --- Hero Section (The Reference Design) --- */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10%;
+            padding-top: 80px; /* offset for fixed header */
+            overflow: hidden;
+        }
+
+        /* Canvas for Particle Effect */
+        #particles-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        .hero-text {
+            flex: 1;
+            z-index: 2;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            color: var(--dark-blue);
+            margin-bottom: 10px;
+        }
+
+        .hero-text h1 span {
+            color: var(--primary);
+        }
+
+        .hero-text h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        .hero-text h3 span {
+            color: #C70039; /* Reddish color for typing text */
+        }
+
+        .btn-about {
+            display: inline-block;
+            background-color: var(--button-blue);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(42, 8, 150, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .btn-about:hover {
+            transform: translateY(-3px);
+        }
+
+        .social-icons {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            width: 45px;
+            height: 45px;
+            background: var(--dark-blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .hero-img {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* The Yellow Circle Background */
+        .img-bg-shape {
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            background-color: #FFD700; /* Yellow */
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.3);
+        }
+
+        .my-photo {
+            width: 400px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 8px solid white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        /* --- About & Stats --- */
+        .section {
+            padding: 80px 10%;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--dark-blue);
+        }
+        
+        .section-title i { color: var(--primary); margin-right: 10px; }
+
+        .about-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .school-info {
+            background: #800000;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            display: inline-block;
+        }
+
+        .stats-wrapper {
+            display: flex;
+            gap: 50px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .stat-box {
+            text-align: center;
+        }
+
+        .stat-num {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .stat-desc {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-gray);
+        }
+
+        /* --- Skills Section --- */
+        .skills-section {
+            background-color: var(--bg-off-white);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .skill-card h3 {
+            margin-bottom: 20px;
+            color: var(--button-blue);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .skill-icons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .s-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-gray);
+        }
+
+        .s-icon i {
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+        }
+
+        /* Icon Colors */
+        .fa-html5 { color: #E34F26; }
+        .fa-css3-alt { color: #1572B6; }
+        .fa-js { color: #F7DF1E; }
+        .fa-react { color: #61DAFB; }
+        .fa-python { color: #3776AB; }
+        .fa-java { color: #007396; }
+        .fa-android { color: #3DDC84; }
+        .fa-database { color: #444; }
+
+        /* --- Projects Section --- */
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .project-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .project-info {
+            padding: 25px;
+        }
+
+        .project-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .btn-project {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 20px;
+            background: var(--dark-blue);
+            color: white;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        /* --- Contact Section --- */
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .contact-left {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-left h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-item i {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-off-white);
+            color: var(--button-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-right {
+            flex: 1.5;
+            min-width: 300px;
+        }
+
+        form input, form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: var(--bg-off-white);
+        }
+
+        form button {
+            background: var(--button-blue);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        form button:hover {
+            background: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+                justify-content: center;
+                padding-top: 100px;
+                height: auto;
+                padding-bottom: 50px;
+            }
+
+            .hero-text h1 { font-size: 2.5rem; }
+            
+            .hero-img { margin-bottom: 40px; }
+            .img-bg-shape { width: 320px; height: 320px; }
+            .my-photo { width: 280px; height: 280px; }
+            
+            .social-icons { justify-content: center; }
+            
+            .nav-links { display: none; } /* Hide nav links on mobile for simplicity */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Canvas for Particle Background -->
+    <canvas id="particles-canvas"></canvas>
+
+    <header>
+        <div class="logo">
+            <i class="fab fa-js"></i> Aveesha
+        </div>
+        <nav class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-text">
+            <h1>Hi There,<br> I'm Aveesha <span>Ninsara</span></h1>
+            <h3>I Am Into <span class="typing-text"></span></h3>
+            
+            <a href="#about" class="btn-about">About Me <i class="fas fa-arrow-down"></i></a>
+
+            <div class="social-icons">
+                <a href="https://linkedin.com/in/ninsara" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://instagram.com/a_ninsara.exe" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://web.facebook.com/profile.php?id=61584732637665" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/ninsara71646" target="_blank"><i class="fab fa-twitter"></i></a> <!-- Twitter/X Icon -->
+                <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+
+        <div class="hero-img">
+            <div class="img-bg-shape"></div>
+            <!-- Your specific image -->
+            <img src="https://i.ibb.co/TxvScJnp/cm08ef4lm0aobb7ej1q13zj1l-original.jpg" alt="Aveesha Ninsara" class="my-photo">
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <h2 class="section-title"><i class="fas fa-user"></i> About Me</h2>
+        <div class="about-container">
+            <div class="school-info">
+                <i class="fas fa-graduation-cap"></i> Student of Nalanda College
+            </div>
+            <p style="max-width: 700px; color: #555;">
+                I am a 14-year-old passionate Full Stack Developer with over 3 years of coding experience. 
+                I love building software that solves real-world problems.
+            </p>
+
+            <!-- Counting Stats -->
+            <div class="stats-wrapper" id="counter-section">
+                <div class="stat-box">
+                    <div class="stat-num" data-target="14">0</div>
+                    <div class="stat-desc">Years Old</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-num" data-target="3">0</div>
+                    <div class="stat-desc">Years Experience</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-num" data-target="20">0</div>
+                    <div class="stat-desc">Projects Done</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section skills-section" id="skills">
+        <h2 class="section-title"><i class="fas fa-laptop-code"></i> Skills & Tools</h2>
+        <div class="skills-grid">
+            
+            <!-- Web -->
+            <div class="skill-card">
+                <h3>Web Development</h3>
+                <div class="skill-icons">
+                    <div class="s-icon"><i class="fab fa-html5"></i>HTML</div>
+                    <div class="s-icon"><i class="fab fa-css3-alt"></i>CSS</div>
+                    <div class="s-icon"><i class="fab fa-js"></i>JS</div>
+                    <div class="s-icon"><i class="fab fa-react"></i>React</div>
+                </div>
+            </div>
+
+            <!-- App/Software -->
+            <div class="skill-card">
+                <h3>App & Software</h3>
+                <div class="skill-icons">
+                    <div class="s-icon"><i class="fab fa-python"></i>Python</div>
+                    <div class="s-icon"><i class="fab fa-java"></i>Java</div>
+                    <div class="s-icon"><i class="fab fa-android"></i>Kotlin</div>
+                    <div class="s-icon"><i class="fas fa-mobile-alt"></i>Flutter</div>
+                </div>
+            </div>
+
+            <!-- Database -->
+            <div class="skill-card">
+                <h3>Databases</h3>
+                <div class="skill-icons">
+                    <div class="s-icon"><i class="fas fa-fire" style="color:#FFCA28"></i>Firebase</div>
+                    <div class="s-icon"><i class="fas fa-database"></i>SQLite</div>
+                    <div class="s-icon"><i class="fas fa-leaf" style="color:#4DB33D"></i>MongoDB</div>
+                    <div class="s-icon"><i class="fas fa-bolt" style="color:#3ECF8E"></i>Supabase</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+        <h2 class="section-title"><i class="fas fa-briefcase"></i> My Projects</h2>
+        
+        <div class="project-card">
+            <img src="https://i.ibb.co/rfvvBSmZ/Kema.jpg" alt="Kema AI" class="project-img">
+            <div class="project-info">
+                <h3>Kema - AI Recipe Generator</h3>
+                <p>An intelligent web application that generates cooking recipes using AI. Built for food lovers and home cooks.</p>
+                <a href="https://kemaai.netlify.app" target="_blank" class="btn-project">View Project <i class="fas fa-external-link-alt"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section skills-section" id="contact">
+        <h2 class="section-title"><i class="fas fa-headset"></i> Get In Touch</h2>
+        <div class="contact-container">
+            
+            <div class="contact-left">
+                <h3>Let's Connect</h3>
+                <p style="margin-bottom: 20px;">I'm currently available for freelance work and project collaborations.</p>
+                
+                <div class="info-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <div>
+                        <strong>Phone</strong><br>+94 77 185 0503
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <strong>Personal Email</strong><br>aveeshaninsara14@gmail.com
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <i class="fas fa-briefcase"></i>
+                    <div>
+                        <strong>Work Email</strong><br>ninsaradevprojects@gmail.com
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-right">
+                <!-- Using FormSubmit for working email functionality without backend code -->
+                <form action="https://formsubmit.co/aveeshaninsara14@gmail.com" method="POST">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                    
+                    <!-- Redirect to same page after submit -->
+                    <input type="hidden" name="_next" value="https://aveesha.github.io">
+                    <input type="hidden" name="_captcha" value="false">
+
+                    <button type="submit">Send Message <i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 20px; background: var(--dark-blue); color: white;">
+        <p>Created by Aveesha Ninsara | &copy; 2025 All Rights Reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // 1. Typing Animation
+        const textElement = document.querySelector('.typing-text');
+        const words = ["Web Development", "App Development", "Coding", "AI Solutions"];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeEffect() {
+            const currentWord = words[wordIndex];
+            
+            if (isDeleting) {
+                textElement.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                textElement.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                isDeleting = true;
+                setTimeout(typeEffect, 2000); // Pause at end of word
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                setTimeout(typeEffect, 500);
+            } else {
+                setTimeout(typeEffect, isDeleting ? 100 : 150);
+            }
+        }
+        typeEffect();
+
+        // 2. Counting Animation
+        const counters = document.querySelectorAll('.stat-num');
+        const speed = 200; // The lower the slower
+
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const inc = target / speed;
+
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(updateCount, 40);
+                    } else {
+                        counter.innerText = target + "+";
+                    }
+                };
+                updateCount();
+            });
+        };
+
+        // Trigger counting when scrolled into view
+        let counterSection = document.getElementById('counter-section');
+        let counterStarted = false;
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY + window.innerHeight > counterSection.offsetTop && !counterStarted) {
+                animateCounters();
+                counterStarted = true;
+            }
+        });
+
+        // 3. Particle Background Logic (Simple Connection Network)
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particlesArray;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+                this.color = '#ccc';
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
+                if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            let numberOfParticles = (canvas.width * canvas.height) / 15000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function connectParticles() {
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) +
+                                   ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    if (distance < (canvas.width/7) * (canvas.height/7)) {
+                        ctx.strokeStyle = 'rgba(150, 150, 150, 0.1)';
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            connectParticles();
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles();
+        animateParticles();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
+        });
+
+    </script>
+</body>
+</html>
